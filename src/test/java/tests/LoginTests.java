@@ -44,11 +44,38 @@ public class LoginTests extends TestBase {
                 "Error message is not correct");
         }
 
-        @Test
-        public void loginTestNegative2() {
-             loginPage.loginAsAtlassian(LOGIN,"123")
+    @Test(dataProviderClass =DataProviders.class,dataProvider = "dataProviderSecond")
+    public void loginTestNegative1DP2 (String login,String password, String message) throws InterruptedException {
+
+        loginPage.enterLoginAndPassword(login)
+                .enterPasswordNormal(password);
+        Thread.sleep(2000);//я не понимаю почему работает только с задержкой, а с другими командами - не работает
+        //.waitLoginButtonIsClickable()
+        loginPage.pressLoginButton()
+                .waitErrorMessageLoginIncorrect();
+        Assert.assertEquals(loginPage.getErrorMessageloginIncorrect(), message,
+                "Error message is not correct");
+    }
+
+        @Test(dataProviderClass = DataProviders.class, dataProvider = "DPnegativePasswordIncorrect")
+        public void loginTestNegative2(String login, String password) {
+             loginPage.loginAsAtlassian(login,password)
             .waitErrorMessagePasswordIncorrect();
             Assert.assertTrue(loginPage.getIncorrectPassswordMessage().contains("Incorrect email address and / or password."),
                     "There is no error message or the text of the message is not correct");
         }
+
+    @Test(dataProviderClass =DataProviders.class,dataProvider = "dataProviderThird")
+    public void loginTestNegative1DP3 (String login,String password) throws InterruptedException {
+
+        loginPage.enterLoginAndPassword(login)
+                .enterPasswordNormal(password);
+        Thread.sleep(2000);//я не понимаю почему работает только с задержкой, а с другими командами - не работает
+        //.waitLoginButtonIsClickable()
+        loginPage.pressLoginButton()
+                .waitErrorMessageLoginIncorrect();
+        Assert.assertEquals(loginPage.getErrorMessageloginIncorrect(), "There isn't an account for this email",
+                "Error message is not correct");
+    }
+
     }
