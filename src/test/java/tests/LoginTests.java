@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.selenium.pages.*;
 import ru.stqa.selenium.pages.LoginPageHelper;
+import util.DataProviders;
 
 
 public class LoginTests extends TestBase {
@@ -30,15 +31,16 @@ public class LoginTests extends TestBase {
 
         }
 
-    @Test
-        public void loginTestNegative1() throws InterruptedException{
+    @Test(dataProviderClass =DataProviders.class,dataProvider = "dataProviderFirst")
+        public void loginTestNegative1 (String login,String password, String message) throws InterruptedException {
 
-        loginPage.enterLoginAndPassword("1a@yahoo.com");
+        loginPage.enterLoginAndPassword(login)
+                .enterPasswordNormal(password);
         Thread.sleep(2000);//я не понимаю почему работает только с задержкой, а с другими командами - не работает
         //.waitLoginButtonIsClickable()
         loginPage.pressLoginButton()
         .waitErrorMessageLoginIncorrect();
-          Assert.assertEquals(loginPage.getErrorMessageloginIncorrect(), "There isn't an account for this email",
+          Assert.assertEquals(loginPage.getErrorMessageloginIncorrect(), message,
                 "Error message is not correct");
         }
 

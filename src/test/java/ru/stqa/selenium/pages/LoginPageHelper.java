@@ -168,4 +168,9 @@ public class LoginPageHelper extends PageBase {
        // return errorMessageIncorrectPassword.getText();
         return noPasswordError.getText();
     }
+
+    public  LoginPageHelper enterPasswordNormal(String password) {
+        fillField(passwordField,password);
+        return this;
+    }
 }
