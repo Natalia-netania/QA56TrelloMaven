@@ -23,32 +23,29 @@ public class LoginTests extends TestBase {
         public void loginTestPositive()  {
 
            // loginPage.openLoginPage();
-            loginPage.enterLoginAtlassianAndClicLogin(LOGIN);
-            loginPage.enterPasswordAtlassionAndClickPassword(PASSWORD);
+            loginPage.enterLoginAtlassianAndClicLogin(LOGIN)
+            .enterPasswordAtlassionAndClickPassword(PASSWORD);
             boardsPage.waitUntilPageIsLoaded();
             Assert.assertEquals(boardsPage.getButtonBoardsText(),"Доски","Text on the boardIcon is not 'Доски'");
 
         }
 
     @Test
-        public void loginTestNegative1() throws InterruptedException {
+        public void loginTestNegative1() throws InterruptedException{
 
-        //loginPage.openLoginPage();
         loginPage.enterLoginAndPassword("1a@yahoo.com");
-        Thread.sleep(2000);
-         //loginPage.waitLoginButtonIsClickable();
-        loginPage.pressLoginButton();
-        loginPage.waitErrorMessageLoginIncorrect();
+        Thread.sleep(2000);//я не понимаю почему работает только с задержкой, а с другими командами - не работает
+        //.waitLoginButtonIsClickable()
+        loginPage.pressLoginButton()
+        .waitErrorMessageLoginIncorrect();
           Assert.assertEquals(loginPage.getErrorMessageloginIncorrect(), "There isn't an account for this email",
                 "Error message is not correct");
         }
 
         @Test
         public void loginTestNegative2() {
-           //  loginPage.openLoginPage();
-             loginPage.loginAsAtlassian(LOGIN,"123");
-             //loginPage.waitLoginButtonIsClickable();
-            loginPage.waitErrorMessagePasswordIncorrect();
+             loginPage.loginAsAtlassian(LOGIN,"123")
+            .waitErrorMessagePasswordIncorrect();
             Assert.assertTrue(loginPage.getIncorrectPassswordMessage().contains("Incorrect email address and / or password."),
                     "There is no error message or the text of the message is not correct");
         }

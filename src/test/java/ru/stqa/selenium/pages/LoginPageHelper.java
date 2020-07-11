@@ -54,23 +54,27 @@ public class LoginPageHelper extends PageBase {
         waitUntilElementIsClickable(loginButton, 10);
     }
 
-    public void enterLoginAtlassianAndClicLogin(String login){
-        //driver.findElement(By.id("user")).sendKeys(login);
-        userField.sendKeys(login);
+    public LoginPageHelper enterLoginAtlassianAndClicLogin(String login){
+        //userField.click();
+        //userField.click();
+        //userField.sendKeys(login);
+        fillField(userField,login);
         waitUntilAttributeValuesIs(loginButton,"value","Log in with Atlassian",10);
         //WebElement logButton = driver.findElement(By.id("login"));
        // logButton.click();
         loginButton.click();
        // waitUntilElemetIsClickable(By.id("login-submit"),15);
-        waitUntilElementIsClickable(loinSubmitButton,20);
+        waitUntilElementIsClickable(loinSubmitButton,15);
+        return this;
 
     }
-    public void enterPasswordAtlassionAndClickPassword(String password){
-       // driver.findElement(By.id("password")).sendKeys(password);
-        passwordField.sendKeys(password);
+    public LoginPageHelper enterPasswordAtlassionAndClickPassword(String password){
+     //passwordField.click();
+     //passwordField.clear();
+       // passwordField.sendKeys(password);
+        fillField(passwordField,password);
         loinSubmitButton.click();
-        //WebElement enterButton = driver.findElement(By.id("login-submit"));
-        //enterButton.click();
+        return this;
     }
 
 
@@ -88,19 +92,21 @@ public class LoginPageHelper extends PageBase {
         driver.findElement(By.id("login-submit")).click();
     }
 
-    public void loginAsAtlassian(String login, String password){
+    public LoginPageHelper loginAsAtlassian(String login, String password){
         this.enterLoginAtlassianAndClicLogin(login);
         this.enterPasswordAtlassionAndClickPassword(password);
+        return this;
     }
 
     public void waitUntilFieldPasswordIsVisible(){
         //passwordField.waitUntilElementIsVisible
         waitUntilElementIsVisible(passwordField,30);
     }
-    public void pressLoginButton() {
+    public LoginPageHelper pressLoginButton() {
 
         //driver.findElement(By.id("login")).click();
         loginButton.click();
+        return this;
     }
 
     public void waitErrorMessage() {
@@ -112,24 +118,26 @@ public class LoginPageHelper extends PageBase {
         return errorMessage.getText();
     }
 
-    public  void enterLoginAndPassword(String login){
+    public  LoginPageHelper enterLoginAndPassword(String login){
         //driver.findElement(By.id("user")).sendKeys(login);
         userField.sendKeys(login);
         //passwordField.sendKeys("123");
         //driver.findElement(By.id("password")).sendKeys("123");
+        return this;
     }
 
     public void clickLoginButtonNormal() {
         driver.findElement(By.id("login")).click();
     }
 
-    public void waitErrorMessageLoginIncorrect(){
+    public LoginPageHelper waitErrorMessageLoginIncorrect(){
       // waitUntilElementIsVisible(By.xpath("(//*[@class= 'error-message'])[1]"),50);
         //waitUntilElementIsVisible(loginError,50);
        waitUntilElementIsVisible(noLoginError,10);
       //  WebElement mist1Button = driver.findElement(By.xpath("(//*[@class= 'error-message'])[1]"));
         System.out.println("Error message1: " + noLoginError.getText());
        // System.out.println("Error message1: " + mist1Button.getText());
+        return this;
     }
 
     public String getErrorMessageloginIncorrect() {
@@ -138,19 +146,21 @@ public class LoginPageHelper extends PageBase {
         return noLoginError.getText();
     }
 
-    public void waitLoginButtonIsClickable(){
+    public LoginPageHelper waitLoginButtonIsClickable(){
 
         waitUntilElementIsClickable(loginButton,30);
         System.out.println("Login Button " + loginButton.getTagName());
         //waitUntilElementIsClickable(By.id("login"), 30);
+        return this;
     }
 
-    public void waitErrorMessagePasswordIncorrect() {
+    public LoginPageHelper waitErrorMessagePasswordIncorrect() {
         WebElement errorMessageIncorrectPassword;
         //waitUntilElementIsVisible(By.xpath("//div[@id='login-error']/span"),15);
         waitUntilElementIsVisible(noPasswordError,15);
         //System.out.println("Error message: " + driver.findElement(By.xpath("//div[@id='login-error']/span")).getText());
         System.out.println("Error message: " + noPasswordError.getText());
+        return this;
     }
 
     public String getIncorrectPassswordMessage(){

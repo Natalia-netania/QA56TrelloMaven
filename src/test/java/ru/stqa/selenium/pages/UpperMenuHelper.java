@@ -6,20 +6,19 @@ import org.openqa.selenium.support.FindBy;
 
 public class UpperMenuHelper extends PageBase {
 
-    //@FindBy(xpath = "//button[@data-test-id = 'headed-member-menu-button']")
-    @FindBy(xpath = "//div[@class='_1FekJJAz6Hu32v']")
+    @FindBy(xpath = "//button[@data-test-id = 'headed-member-menu-button']")
+    //@FindBy(xpath = "//div[@class='_1FekJJAz6Hu32v']")
     WebElement upperRight;
 
-    //@FindBy(xpath = "//a[@data-test-id = 'headed-member-menu-button']")
+    @FindBy(xpath = "//a[@data-test-id = 'headed-member-menu-button']")
     //@FindBy(xpath = "//span[contains(text(),'Действия')]")
-    @FindBy(xpath = "//div[@class='atlaskit-portal-container']")
+    //@FindBy(xpath = "//div[@class='atlaskit-portal-container']")
     //div[@class='atlaskit-portal-container']
     WebElement profilevisabilityMenuItem;
 
-    //@FindBy(xpath = "(//span[contains(text(),'Действия')]/..)[2]")
+    @FindBy(xpath = "(//span[contains(text(),'Действия')]/..)[2]")
     //@FindBy(xpath = "(//a/span[contains(text(),'Действия')]")
-    @FindBy(xpath = "//a[@class='_2jR0BZMM5cBReR']")
-    //_2jR0BZMM5cBReR
+    //@FindBy(xpath = "//a[@class='_2jR0BZMM5cBReR']")
     WebElement activityMenuItem;
 ///
     @FindBy(xpath = "(//span[contains(text(),'Действия')]/..)[2]")
