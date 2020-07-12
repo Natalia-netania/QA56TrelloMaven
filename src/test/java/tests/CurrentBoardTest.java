@@ -5,6 +5,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.selenium.pages.*;
+import util.DataProviders;
 
 
 public class CurrentBoardTest extends TestBase {
@@ -14,7 +15,7 @@ public class CurrentBoardTest extends TestBase {
     CurrentBoardHelper qaHaifa56Page;
 
     @BeforeMethod
-    public void initTests() {
+    public void initTests() throws InterruptedException {
 
         loginPage = PageFactory.initElements(driver, LoginPageHelper.class);
         boardsPage = PageFactory.initElements(driver, BoardsPageHelper.class);
@@ -22,6 +23,7 @@ public class CurrentBoardTest extends TestBase {
         loginPage.openLoginPage();
         loginPage.loginAsAtlassian(LOGIN, PASSWORD);
         boardsPage.waitUntilPageIsLoaded();
+        //Thread.sleep(8000);
         qaHaifa56Page.openCurrentBoard();
         qaHaifa56Page.waitUntilPageIsLoaded();
     }
@@ -39,14 +41,14 @@ public class CurrentBoardTest extends TestBase {
 
     }
 
-    @Test
-    public void createNewCard() {
+    @Test(dataProviderClass = DataProviders.class,dataProvider = "dataProviderThirdCard")
+    public void createNewCard(String cardTitle) {
 
         if (!qaHaifa56Page.existsList()) qaHaifa56Page.createNewList("Test");
 
         int beforeAdding = qaHaifa56Page.receiveQuantityOfCards();
         qaHaifa56Page.pressAddCardButton();
-        qaHaifa56Page.enterTextToCard("test card");
+        qaHaifa56Page.enterTextToCard(cardTitle);
         qaHaifa56Page.submitAddingCard();
         qaHaifa56Page.cancelEditCardMode();
 

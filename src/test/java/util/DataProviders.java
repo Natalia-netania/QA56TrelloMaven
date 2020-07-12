@@ -1,7 +1,9 @@
 package util;
 
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
+import javax.swing.text.View;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -78,6 +80,32 @@ public class DataProviders {
     private Object generateRandomName() {
 
         return "demo" + (new Random()).nextInt()+"@gmail.com";
+    }
+    @DataProvider
+    public Iterator<Object[]> dataProviderThirdCard() {
+        List<Object[]> data = new ArrayList();
+
+        for(int i = 0; i < 3; ++i) {
+            data.add(new Object[]{this.givenWhenGeneratingRandomAlphanumereticString()});
+        }
+
+        return data.iterator();
+    }
+// Generator from internet (length only 8 symbols)
+    public Object givenWhenGeneratingRandomAlphanumereticString(){
+        Random random = new Random();
+        int leftLimit = 48; // numeral'0'
+        int rightLimit = 122; // numeral 'z'
+        int targetStringLenght = 8;
+
+        String  generatedString = random.ints(leftLimit,rightLimit+1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLenght)
+                .collect(StringBuilder :: new, StringBuilder :: appendCodePoint, StringBuilder :: append)
+                .toString();
+        //System.out.println( generatedString);
+    return generatedString;
+
     }
 
     @DataProvider

@@ -42,6 +42,7 @@ public class CurrentBoardHelper extends PageBase {
         waitUntilElementIsVisible(By.xpath(boardTitleLocator()),10);
         //waitUntilElemetIsClickable(By.xpath("//span[@class='placeholder']"),10);
         waitUntilElementIsClickable(addListButton,10);
+        //waitUntilElementIsClickable(addListOption,10);
     }
 
     public int getListsQuantity(){
