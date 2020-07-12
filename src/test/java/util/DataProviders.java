@@ -79,4 +79,20 @@ public class DataProviders {
 
         return "demo" + (new Random()).nextInt()+"@gmail.com";
     }
+
+    @DataProvider
+    public static Iterator<Object[]> dataProviderFirstList() throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(
+                DataProviders.class
+                        .getResourceAsStream("/listTitleField.data")));
+
+        List<Object[]> userData = new ArrayList<Object[]>();
+        String line = in.readLine();
+        while (line != null) {
+            userData.add(line.split(";"));
+            line = in.readLine();
+        }
+        in.close();
+        return userData.iterator();
+    }
 }

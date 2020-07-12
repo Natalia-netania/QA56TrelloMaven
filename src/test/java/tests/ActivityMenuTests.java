@@ -4,6 +4,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.selenium.pages.*;
+import util.DataProviders;
 
 public class ActivityMenuTests extends TestBase {
 
@@ -30,16 +31,10 @@ public class ActivityMenuTests extends TestBase {
 
     }
 
-    @Test
-    public void addingNewListEventInActivity(){
-        String listTitle = "Activity new";
-        //qaHaifa56Page.createNewList(listTitle);
-        qaHaifa56Page.createNewList("Test");
-        //upperMenuPage.openMenuPage();
-       // upperMenuPage.waitUntilPageIsLoaded();
-       // upperMenuPage.openActivityPage();
-      //  activityPage.waitUntilPageIsLoaded();
-
+    @Test(dataProviderClass = DataProviders.class,dataProvider = "dataProviderFirstList")
+    public void addingNewListEventInActivity(String listTitle){
+        //String listTitle = "Activity new";
+        qaHaifa56Page.createNewList(listTitle);
       //  Assert.assertTrue(activityPage.getLastActivityText().contains ("added list " + listTitle+ "to"),
         //        "The text in the last activity record doesn't correspond to event adding new list" + listTitle);
 
