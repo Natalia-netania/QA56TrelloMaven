@@ -16,7 +16,7 @@ public class ProfileVisabilityScreen extends TestBase {
     ProfileVisabilityScreenHelper profilePage;
 
     @BeforeMethod
-    public void initTests() {
+    public void initTests() throws InterruptedException {
 
         //loginPage = new LoginPageHelper(driver);
        // boardsPage = new BoardsPageHelper(driver);
@@ -27,14 +27,17 @@ public class ProfileVisabilityScreen extends TestBase {
         loginPage.openLoginPage();
         loginPage.loginAsAtlassian(LOGIN, PASSWORD);
         boardsPage.waitUntilPageIsLoaded();
-
+        Thread.sleep(5000);
         profilePage.waitUntilElementIsClickable();
         profilePage.clickMenuButton();
     }
 
     @Test
     public void comparisonLabelTextVerification() {
+        log4j.startTestCase("comparisonLabelTextVerification");
+        log4j.info("Login/password were entering: " + LOGIN +"," + PASSWORD);
         profilePage.waitUntilElementIsVisible();
+        log4j.info("Get Name Button");
         profilePage.getNameButton();
         if(
                 Objects.equals(profilePage.getNameButtonText(),profilePage.getNameButtonTitleText() )
@@ -48,8 +51,12 @@ public class ProfileVisabilityScreen extends TestBase {
     @Test
     public void userNameVerification(){
 
+        log4j.startTestCase("userNameVerification");
+
         profilePage.waitUntilElementIsClickable1();
+        log4j.info("Wait until load Button User Menu");
         profilePage.loadButtonUserName();
+        log4j.info("Wait until load Button User Menu title");
         profilePage.loadButtonUserNamePub();
         Assert.assertTrue(profilePage.getNameUserName().contains("natalia46615563")&&profilePage.getNameUserNamePub().equals("natalia46615563"));
     }

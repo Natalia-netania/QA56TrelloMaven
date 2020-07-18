@@ -36,6 +36,8 @@ public class GettingStartedHelpTests extends TestBase {
     }
     @Test
     public void gettingStartedGuideHelpOpening() {
+        log4j.startTestCase("gettingStartedGuideHelpOpening");
+        log4j.info("Login/password were entering: " + LOGIN +"," + PASSWORD);
         helpSectionPage.chooseGettingStartedGuideMenu();
         gettingStartedGuidePage.switchToNewWindowAndWaitPageLoading();
         Assert.assertEquals(gettingStartedGuidePage.getTitle(),"Getting Started with Trello",

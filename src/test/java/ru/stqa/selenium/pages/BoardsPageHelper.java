@@ -20,7 +20,7 @@ public class BoardsPageHelper extends PageBase {
     public void waitUntilPageIsLoaded(){
 
         waitUntilElementIsClickable(boardIcon, 40);
-        waitUntilElementIsClickable(upperRight,20);
+        waitUntilElementIsClickable(upperRight,40);
     }
 
     public String getButtonBoardsText(){

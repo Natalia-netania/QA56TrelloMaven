@@ -15,7 +15,7 @@ public class ActivityMenuTests extends TestBase {
     ActivityPageHelper activityPage;
 
     @BeforeMethod
-    public void initTests() {
+    public void initTests() throws InterruptedException {
 
         loginPage = PageFactory.initElements(driver, LoginPageHelper.class);
         boardsPage = PageFactory.initElements(driver, BoardsPageHelper.class);
@@ -25,6 +25,7 @@ public class ActivityMenuTests extends TestBase {
 
         loginPage.openLoginPage();
         loginPage.loginAsAtlassian(LOGIN, PASSWORD);
+       // Thread.sleep(5000);  //иногда приходиться вставлять, очень тормозит сайт
         boardsPage.waitUntilPageIsLoaded();
         qaHaifa56Page.openCurrentBoard();
         qaHaifa56Page.waitUntilPageIsLoaded();
@@ -34,7 +35,10 @@ public class ActivityMenuTests extends TestBase {
     @Test(dataProviderClass = DataProviders.class,dataProvider = "dataProviderFirstList")
     public void addingNewListEventInActivity(String listTitle){
         //String listTitle = "Activity new";
+        log4j.startTestCase("addingNewListEventInActivity");
+        log4j.info("Login/password were entering: " + LOGIN +"," + PASSWORD);
         qaHaifa56Page.createNewList(listTitle);
+        log4j.info("New list created " + listTitle);
       //  Assert.assertTrue(activityPage.getLastActivityText().contains ("added list " + listTitle+ "to"),
         //        "The text in the last activity record doesn't correspond to event adding new list" + listTitle);
 

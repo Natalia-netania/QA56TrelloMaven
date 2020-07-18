@@ -19,14 +19,20 @@ public class LoginTests extends TestBase {
         loginPage = PageFactory.initElements(driver, LoginPageHelper.class);
         boardsPage = PageFactory.initElements(driver, BoardsPageHelper.class);
         loginPage.openLoginPage();
+
     }
         @Test
         public void loginTestPositive()  {
 
            // loginPage.openLoginPage();
+            log4j.startTestCase("loginTestPositive");
+            log4j.info("Login/password were entering: " + LOGIN +"," + PASSWORD);
             loginPage.enterLoginAtlassianAndClicLogin(LOGIN)
             .enterPasswordAtlassionAndClickPassword(PASSWORD);
+            log4j.info("Boards screen is loading");
+            log4j.info("Wait until submit button is clickable");
             boardsPage.waitUntilPageIsLoaded();
+            log4j.info("Test result verification (assert): Text on the boardIcon is 'Boards");
             Assert.assertEquals(boardsPage.getButtonBoardsText(),"Доски","Text on the boardIcon is not 'Доски'");
 
         }
@@ -46,10 +52,11 @@ public class LoginTests extends TestBase {
 
     @Test(dataProviderClass =DataProviders.class,dataProvider = "dataProviderSecond")
     public void loginTestNegative1DP2 (String login,String password, String message) throws InterruptedException {
-
+        log4j.startTestCase("loginTestNegative1DP2: " + login + ", " +password + ", " + message);
+        log4j.info("Login to system: " + login + ", " +password + ", " + message);
         loginPage.enterLoginAndPassword(login)
                 .enterPasswordNormal(password);
-        Thread.sleep(2000);//я не понимаю почему работает только с задержкой, а с другими командами - не работает
+        Thread.sleep(2000);//я не понимаю почему работает только с задержкой, а с другими командами - не работает - internet slow
         //.waitLoginButtonIsClickable()
         loginPage.pressLoginButton()
                 .waitErrorMessageLoginIncorrect();

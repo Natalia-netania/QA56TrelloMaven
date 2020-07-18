@@ -38,14 +38,20 @@ public class ProfileVisabilityScreenHelper extends PageBase {
     }
 
     public void waitUntilElementIsClickable1(){
+
+        log4j.info("-- Class ProfileVisabilityScreenHelper, method waitUntilElementIsClickable1() was started");
         //waitUntilElemetIsClickable(By.xpath("//a[@class='tabbed-pane-nav-item-button js-member-activity']"),50);
+        log4j.info("Wait until User Menu Button is clickable");
         waitUntilElementIsClickable(userMenuButton,50);
     }
 
     public void clickMenuButton(){
+        log4j.info("-- Class ProfileVisabilityScreenHelper, method clickMenuButton() was started");
        // WebElement menuButton = driver.findElement(By.xpath("//button[@data-test-id='header-member-menu-button']"));
+        log4j.info("Click Menu Button N");
         menuButton.click();
         //driver.findElement(By.xpath("//a[@data-test-id='header-member-menu-profile']")).click();
+        log4j.info("Click Menu Button 'Профиль и доступ'");
         buttonMenu.click();
     }
 
@@ -63,7 +69,9 @@ public class ProfileVisabilityScreenHelper extends PageBase {
     }
 
     public void waitUntilElementIsVisible(){
+        log4j.info("-- Class ProfileVisabilityScreenHelper, method waitUntilElementIsVisible() was started");
        // waitUntilElemetIsClickable(By.xpath("//button[@data-test-id='header-member-menu-button']"),40);
+        log4j.info("Wait until Menu Button is visible");
         waitUntilElementIsVisible(menuButton,40);
     }
 

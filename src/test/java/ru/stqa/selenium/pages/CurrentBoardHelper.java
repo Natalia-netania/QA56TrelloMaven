@@ -58,29 +58,40 @@ public class CurrentBoardHelper extends PageBase {
         this.cancelFromEditMode();
     }
     public void pressCreateNewListButton() {
+        log4j.info("-- Class CurrentBoardHelper, method pressCreateNewListButton() was started");
         //WebElement addListOption = driver.findElement(By.xpath("//span[@class='placeholder']"));
         addListOption.click();
+        log4j.info(" Clicked 'Добавьте еще одну колонку'");
+        log4j.info("Wait until field 'Ввести заголовок списка' is visible");
         waitUntilElementIsVisible(addTitleField,10);
        // WebElement addTitleField = driver.findElement(By.xpath("//input[@placeholder='Enter list title...']"));
     }
 
     public void enterTitle(String title) {
+        log4j.info("-- Class CurrentBoardHelper, method enterTitle() was started");
         //WebElement addTitleField = driver.findElement(By.xpath("//input[@placeholder='Ввести заголовок списка']"));
         addTitleField.click();
+        log4j.info(" Clicked field 'Ввести заголовок списка'");
         addTitleField.sendKeys(title);
+        log4j.info("Added title: " + title);
         //waitUntilElemetIsClickable(By.xpath("//input[@type='submit']"),10);
+        log4j.info("Wait until submit is clickable");
         waitUntilElementIsClickable(addListButton,10);
     }
 
     public void submitAddingList() {
+        log4j.info("-- Class CurrentBoardHelper, method submitAddingList() was started");
         //WebElement addListButton = driver.findElement(By.xpath("//input[@type='submit']"));
         addListButton.click();
+        log4j.info("Clicked 'Enter'");
     }
 
     public void cancelFromEditMode() {
+        log4j.info("-- Class CurrentBoardHelper, method cancelFromEditMode() was started");
         //WebElement cancelEdit = driver
         //        .findElement(By.xpath("//a[@class='icon-lg icon-close dark-hover js-cancel-edit']"));
         cancelEditList.click();
+        log4j.info("Clicked 'Cancel'");
     }
 
     public boolean existsList() {
