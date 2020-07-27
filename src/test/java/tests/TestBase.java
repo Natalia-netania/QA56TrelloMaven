@@ -75,7 +75,7 @@ public class TestBase {
 
 
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void initTestSuite() throws IOException {
         SuiteConfiguration config = new SuiteConfiguration();
         baseUrl = config.getProperty("site.url");
@@ -85,7 +85,7 @@ public class TestBase {
         capabilities = config.getCapabilities();
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initWbDriver() {
         //---- Enter to the application ---
         //driver = new ChromeDriver();
@@ -98,7 +98,7 @@ public class TestBase {
 
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDownForTest(ITestResult result){
         if (result.getStatus() == ITestResult.FAILURE){
             String screenName = "screen-" + System.currentTimeMillis() + ".png";
