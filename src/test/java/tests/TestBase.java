@@ -1,15 +1,14 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.google.common.io.Files;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -20,8 +19,12 @@ import ru.stqa.selenium.factory.WebDriverPool;
 import ru.stqa.selenium.pages.*;
 import util.LogLog4j;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+//import java.nio.file.Files;
+//import java.nio.file.Files;
+//import  com.google.common.io;
 
 public class TestBase {
 
@@ -52,9 +55,25 @@ public class TestBase {
         @Override
         public void onException(Throwable throwable, WebDriver driver) {
            // System.out.println("Error: " + throwable);
-            log4j.error("Error: " + throwable);
+            String screenName = "screen-" + System.currentTimeMillis() + ".png";
+            log4j.info("-------------------------------------------------------");
+            createShapshot(screenName, driver);
+            log4j.error("Error: " + throwable + " See file " + screenName);
         }
+      }
+
+    public static void createShapshot(String name, WebDriver driver){
+        File tmp =((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File screen = new File(name);
+        try {
+            Files.copy(tmp,screen);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+      //  return screen.getName();
     }
+
+
 
     @BeforeSuite
     public void initTestSuite() throws IOException {
@@ -80,9 +99,19 @@ public class TestBase {
     }
 
     @AfterMethod
-    public void tearDownForTest(){
-       driver.quit();
+    public void tearDownForTest(ITestResult result){
+        if (result.getStatus() == ITestResult.FAILURE){
+            String screenName = "screen-" + System.currentTimeMillis() + ".png";
+            log4j.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            createShapshot(screenName, driver);
+            log4j.error("Test failure,  " + "see file " + screenName);
+            log4j.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        }
+
+        driver.quit();
     }
+
+
     /*public void waitUntilElemetIsVisible(By locator, int time) {
         try {
             new WebDriverWait(driver,time).until(ExpectedConditions.visibilityOfElementLocated(locator));
@@ -104,9 +133,10 @@ public class TestBase {
             e.printStackTrace();
         }
     }*/
+
+
     @AfterSuite(alwaysRun = true)
     public void tearDown() {
         WebDriverPool.DEFAULT.dismissAll();
     }
-    //public static LogLog4j log4j = new LogLog4j();
 }

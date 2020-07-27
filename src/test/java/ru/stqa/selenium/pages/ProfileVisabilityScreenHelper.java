@@ -99,12 +99,14 @@ public class ProfileVisabilityScreenHelper extends PageBase {
     public void loadButtonUserName(){
         //WebElement userName = driver.findElement(By.xpath("//span[contains(text(),'@')]"));
         System.out.println("userName= "+ userName.getText());
+        log4j.info("userName= "+ userName.getText());
     }
 
     public void loadButtonUserNamePub(){
        // WebElement userNamePub = driver.findElement(By.xpath("//input[@name='username']"));
         //System.out.println("userNamePub = " + userNamePub.getText());
         System.out.println("userNamePub = " + userNamePub.getAttribute("value"));
+        log4j.info("userNamePub = " + userNamePub.getAttribute("value"));
     }
 
 }

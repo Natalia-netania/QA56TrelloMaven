@@ -21,7 +21,7 @@ public class LoginTests extends TestBase {
         loginPage.openLoginPage();
 
     }
-        @Test
+        @Test(groups = {"smoke","regression", "login"})
         public void loginTestPositive()  {
 
            // loginPage.openLoginPage();
@@ -37,12 +37,12 @@ public class LoginTests extends TestBase {
 
         }
 
-    @Test(dataProviderClass =DataProviders.class,dataProvider = "dataProviderFirst")
+    @Test(groups = {"smoke"},dataProviderClass =DataProviders.class,dataProvider = "dataProviderFirst")
         public void loginTestNegative1 (String login,String password, String message) throws InterruptedException {
 
         loginPage.enterLoginAndPassword(login)
                 .enterPasswordNormal(password);
-        Thread.sleep(2000);//я не понимаю почему работает только с задержкой, а с другими командами - не работает
+        Thread.sleep(2000);//я не понимаю почему работает только с задержкой, а с другими командами - не работает-internet tormoz
         //.waitLoginButtonIsClickable()
         loginPage.pressLoginButton()
         .waitErrorMessageLoginIncorrect();

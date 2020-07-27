@@ -1,6 +1,7 @@
 package ru.stqa.selenium.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -163,5 +164,17 @@ public class PageBase {
 
     public String getTitle(){
         return driver.getTitle();
+    }
+
+    private void scrollDownToViewElement(WebElement element) throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Thread.sleep(5000);
+        js.executeScript("arguments[0].scrollIntoView();", element);
+        Thread.sleep(5000);
+    }
+
+    public void scrollDown(int x, int y) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(" + x + "," + y + ")");
     }
 }
